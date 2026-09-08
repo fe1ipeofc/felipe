@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Felipe Rei</title>
+  <!-- Ícones do FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #D3CECA;
+      color: #222222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .profile-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 16px;
+    }
+
+    .name-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .verified-badge {
+      color: #1D9BF0; /* Azul oficial de verificação */
+      font-size: 18px;
+    }
+
+    .bio {
+      font-size: 15px;
+      color: #555555;
+      margin-bottom: 24px;
+    }
+
+    /* Estilo do menu expansível */
+    .accordion {
+      width: 100%;
+      background-color: #F3ECE7;
+      border: none;
+      border-radius: 30px;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      color: #111111;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      transition: background-color 0.2s ease;
+    }
+
+    .accordion .title {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    .accordion .arrow {
+      font-size: 14px;
+      transition: transform 0.3s ease;
+    }
+
+    .accordion.active .arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Container dos Links das Redes Sociais */
+    .links-container {
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease-out;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .links-container.open {
+      max-height: 800px;
+    }
+
+    .link-card {
+      background-color: #F3ECE7;
+      border-radius: 30px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #111111;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      transition: transform 0.1s ease;
+    }
+
+    .link-card:active {
+      transform: scale(0.98);
+    }
+
+    .icon-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid #111111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .link-text {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 700;
+      padding-right: 38px; /* Mantém o texto perfeitamente centralizado */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-container">
+    <!-- Substitua o link da foto abaixo pela URL da sua imagem -->
+    <img class="avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Foto de perfil">
+
+    <div class="name-container">
+      <h1 class="name">Felipe Rei</h1>
+      <i class="fa-solid fa-circle-check verified-badge" title="Verificado"></i>
+    </div>
+
+    <p class="bio">me siga nas redes sociais</p>
+
+    <!-- Botão Principal (Menu Retrátil) -->
+    <button class="accordion" id="sociaisBtn">
+      <span class="title">sociais</span>
+      <i class="fa-solid fa-chevron-down arrow"></i>
+    </button>
+
+    <!-- Lista de Redes Sociais -->
+    <div class="links-container" id="linksList">
+      
+      <!-- Substitua os '#' pelos seus links reais -->
+      <a href="#" class="link-card" target="_blank">
+        <div class="icon-circle"><i class="fa-brands fa-facebook-f"></i></div>
+        <span class="link-text">Facebook</span>
+      </a>
+
+      <a href="#" class="link-card" target="_blank">
+        <div class="icon-circle"><i class="fa-brands fa-tiktok"></i></div>
+        <span class="link-text">tiktok</span>
+      </a>
+
+      <a href="#" class="link-card" target="_blank">
+        <div class="icon-circle"><i class="fa-brands fa-instagram"></i></div>
+        <span class="link-text">Instagram</span>
+      </a>
+
+      <a href="#" class="link-card" target="_blank">
+        <div class="icon-circle"><i class="fa-brands fa-snapchat"></i></div>
+        <span class="link-text">Snapchat</span>
+      </a>
+
+      <a href="#" class="link-card" target="_blank">
+        <div class="icon-circle"><i class="fa-brands fa-threads"></i></div>
+        <span class="link-text">tópicos</span>
+      </a>
+
+      <a href="#" class="link-card" target="_blank">
+        <div class="icon-circle" style="font-size: 11px;">NGL</div>
+        <span class="link-text">NGL</span>
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    const accordionBtn = document.getElementById('sociaisBtn');
+    const linksList = document.getElementById('linksList');
+
+    accordionBtn.addEventListener('click', () => {
+      accordionBtn.classList.toggle('active');
+      linksList.classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>
