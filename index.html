@@ -24,8 +24,44 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 40px 20px;
+      padding: 20px 20px 40px 20px;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Top Bar para os botões Liquid Glass */
+    .top-bar {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      z-index: 10;
+    }
+
+    /* Estilo Liquid Glass (Vidro Líquido / Blur) */
+    .glass-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111111;
+      font-size: 18px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .glass-btn:active {
+      transform: scale(0.92);
+      background: rgba(255, 255, 255, 0.4);
     }
 
     .profile-container {
@@ -117,11 +153,12 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 12px;
+      margin-top: 0px;
     }
 
     .links-container.open {
       max-height: 800px;
+      margin-top: 12px;
     }
 
     .link-card {
@@ -176,6 +213,20 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    }
+
+    /* Classe para esconder o botão secret quando o menu abrir */
+    .secret-card.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      height: 0;
+      padding: 0;
+      margin-top: 0;
     }
 
     .secret-text {
@@ -185,13 +236,111 @@
       position: relative;
     }
 
-    /* Fantasminhas aleatórios e tortos espalhados no botão Secret */
+    /* Fantasminhas aleatórios e tortos no botão Secret */
     .bg-ghost {
       position: absolute;
       color: rgba(255, 255, 255, 0.25);
       font-size: 16px;
       pointer-events: none;
       z-index: 1;
+    }
+
+    /* Pop-up Menu (Modal Contact) Liquid Glass */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      width: 90%;
+      max-width: 320px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-radius: 28px;
+      padding: 24px 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: center;
+      transform: scale(0.85);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #111111;
+      margin-bottom: 4px;
+    }
+
+    .modal-item {
+      background: linear-gradient(135deg, #1e7e34, #0f401b);
+      color: #ffffff;
+      padding: 12px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 10px rgba(15, 64, 27, 0.2);
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+
+    /* Notificação Toast ao compartilhar */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
     }
 
     /* Animações de Vibração / Shake */
@@ -208,7 +357,6 @@
       100% { transform: translate(0, 0) rotate(0deg); }
     }
 
-    /* Animação do balanço do clique */
     .shake-btn {
       animation: shakeBtn 0.4s ease-in-out;
     }
@@ -221,7 +369,7 @@
       80% { transform: translateX(4px) rotate(1deg); }
     }
 
-    /* Elementos caindo / voando (Diamantes e Fantasmas) */
+    /* Elementos caindo / voando */
     .particle {
       position: fixed;
       pointer-events: none;
@@ -254,6 +402,16 @@
   </style>
 </head>
 <body>
+
+  <!-- Top Bar com Botões Liquid Glass -->
+  <div class="top-bar">
+    <button class="glass-btn" id="msgBtn" aria-label="Enviar Mensagem">
+      <i class="fa-regular fa-paper-plane"></i>
+    </button>
+    <button class="glass-btn" id="shareBtn" aria-label="Compartilhar">
+      <i class="fa-solid fa-arrow-up-from-bracket"></i>
+    </button>
+  </div>
 
   <div class="profile-container">
     <!-- Foto Perfil -->
@@ -301,7 +459,6 @@
 
     <!-- Botão Secret com Fantasminhas aleatórios -->
     <a href="https://ngl.link/ifeliperei" class="secret-card" id="secretBtn" target="_blank" rel="noopener noreferrer">
-      <!-- Fantasminhas decorativos em posições tortas/aleatórias -->
       <i class="fa-solid fa-ghost bg-ghost" style="top: 8px; left: 12px; transform: rotate(-25deg) scale(1.1);"></i>
       <i class="fa-solid fa-ghost bg-ghost" style="bottom: 6px; left: 60px; transform: rotate(15deg) scale(0.8);"></i>
       <i class="fa-solid fa-ghost bg-ghost" style="top: 10px; left: 120px; transform: rotate(-10deg) scale(0.9);"></i>
@@ -314,19 +471,80 @@
 
   </div>
 
+  <!-- Modal Pop-up para Mensagens -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-card">
+      <h3 class="modal-title">Enviar mensagem</h3>
+      <a href="https://t.me/fe1ipeofc" target="_blank" class="modal-item">
+        <i class="fa-brands fa-telegram"></i> Telegram
+      </a>
+      <a href="mailto:fe1ip3ofc@gmail.com" class="modal-item">
+        <i class="fa-regular fa-envelope"></i> E-mail
+      </a>
+      <button class="modal-close-btn" id="closeModal">Fechar</button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">Link copiado para a área de transferência!</div>
+
   <script>
-    // Desativa menu de contexto (clique com botão direito / toque longo para abrir guias)
+    // Desativa menu de contexto
     document.addEventListener('contextmenu', e => e.preventDefault());
 
     const accordionBtn = document.getElementById('sociaisBtn');
     const linksList = document.getElementById('linksList');
-    const avatarWrapper = document.getElementById('avatarWrapper');
     const secretBtn = document.getElementById('secretBtn');
+    const avatarWrapper = document.getElementById('avatarWrapper');
 
-    // Toggle do Menu Retrátil
+    const msgBtn = document.getElementById('msgBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const contactModal = document.getElementById('contactModal');
+    const closeModal = document.getElementById('closeModal');
+    const toast = document.getElementById('toast');
+
+    // Alternar o menu sociais e Ocultar/Mostrar o botão secret
     accordionBtn.addEventListener('click', () => {
       accordionBtn.classList.toggle('active');
       linksList.classList.toggle('open');
+      
+      // Oculta o secret se as sociais estiverem abertas
+      if (linksList.classList.contains('open')) {
+        secretBtn.classList.add('hidden');
+      } else {
+        secretBtn.classList.remove('hidden');
+      }
+    });
+
+    // Abrir/Fechar Pop-up de Mensagem
+    msgBtn.addEventListener('click', () => {
+      contactModal.classList.add('active');
+    });
+
+    closeModal.addEventListener('click', () => {
+      contactModal.classList.remove('active');
+    });
+
+    contactModal.addEventListener('click', (e) => {
+      if (e.target === contactModal) {
+        contactModal.classList.remove('active');
+      }
+    });
+
+    // Função de Compartilhamento
+    shareBtn.addEventListener('click', async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'Felipe',
+            url: window.location.href
+          });
+        } catch (err) {}
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      }
     });
 
     // Animação de Balanço nos botões
@@ -337,14 +555,12 @@
       });
     });
 
-    // Função de vibração tátil do aparelho (se disponível)
     function triggerHaptic() {
       if (navigator.vibrate) {
         navigator.vibrate([30, 50, 30]);
       }
     }
 
-    // Configuração de Eventos de Pressão Longa (Long Press)
     function addLongPress(element, onLongPress) {
       let timer = null;
 
@@ -368,7 +584,7 @@
     }
 
     // 1. Clique Longo na FOTO: Vibra + Chuva de Diamantes 💎
-    addLongPress(avatarWrapper, (e) => {
+    addLongPress(avatarWrapper, () => {
       avatarWrapper.classList.add('vibrate');
       setTimeout(() => avatarWrapper.classList.remove('vibrate'), 800);
 
@@ -395,7 +611,7 @@
     });
 
     // 2. Clique Longo no BOTÃO SECRET: Vibra + Fantasmas Escorrendo 👻
-    addLongPress(secretBtn, (e) => {
+    addLongPress(secretBtn, () => {
       secretBtn.classList.add('vibrate');
       setTimeout(() => secretBtn.classList.remove('vibrate'), 800);
 
@@ -418,7 +634,7 @@
       }
     });
 
-    // 3. Clique Longo no resto da Página: Vibração sutil
+    // 3. Clique Longo no resto da Página
     addLongPress(document.body, (e) => {
       if (e.target === document.body) {
         document.body.classList.add('vibrate');
