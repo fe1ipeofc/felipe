@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Felipe</title>
   <!-- Ícones do FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,6 +12,9 @@
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-touch-callout: none; /* Desativa menu de toque no iOS */
+      -webkit-user-select: none;   /* Desativa seleção de texto */
+      user-select: none;
     }
 
     body {
@@ -22,6 +25,7 @@
       align-items: center;
       min-height: 100vh;
       padding: 40px 20px;
+      overflow-x: hidden;
     }
 
     .profile-container {
@@ -30,6 +34,13 @@
       align-items: center;
       width: 100%;
       max-width: 420px;
+      position: relative;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      margin-bottom: 16px;
+      cursor: pointer;
     }
 
     .avatar {
@@ -37,7 +48,7 @@
       height: 130px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 16px;
+      display: block;
     }
 
     .name-container {
@@ -53,7 +64,6 @@
       font-weight: 700;
     }
 
-    /* Imagem do selo de verificado personalizada */
     .verified-badge-img {
       width: 20px;
       height: 20px;
@@ -66,7 +76,7 @@
       margin-bottom: 24px;
     }
 
-    /* Estilo do menu expansível com gradiente verde */
+    /* Estilo dos Botões Principais */
     .accordion {
       width: 100%;
       background: linear-gradient(135deg, #1e7e34, #0f401b);
@@ -81,11 +91,7 @@
       font-weight: 700;
       color: #ffffff;
       box-shadow: 0 4px 10px rgba(15, 64, 27, 0.3);
-      transition: transform 0.2s ease, background 0.3s ease;
-    }
-
-    .accordion:active {
-      transform: scale(0.98);
+      transition: transform 0.2s ease;
     }
 
     .accordion .title {
@@ -102,7 +108,7 @@
       transform: rotate(180deg);
     }
 
-    /* Container dos Links das Redes Sociais */
+    /* Container dos Links */
     .links-container {
       width: 100%;
       max-height: 0;
@@ -118,7 +124,6 @@
       max-height: 800px;
     }
 
-    /* Estilo dos Cards de Link com gradiente verde */
     .link-card {
       background: linear-gradient(135deg, #1e7e34, #0f401b);
       border-radius: 30px;
@@ -129,16 +134,7 @@
       color: #ffffff;
       box-shadow: 0 4px 10px rgba(15, 64, 27, 0.2);
       transition: transform 0.1s ease;
-    }
-
-    .link-card:active {
-      transform: scale(0.98);
-    }
-
-    /* Estilo para o botão Secret (separado) */
-    .standalone-link {
-      width: 100%;
-      margin-top: 12px;
+      position: relative;
     }
 
     .icon-circle {
@@ -152,6 +148,7 @@
       font-size: 18px;
       font-weight: bold;
       color: #ffffff;
+      z-index: 2;
     }
 
     .link-text {
@@ -160,24 +157,119 @@
       font-size: 15px;
       font-weight: 700;
       padding-right: 38px;
+      z-index: 2;
+    }
+
+    /* Botão Secret Estilizado */
+    .secret-card {
+      width: 100%;
+      margin-top: 12px;
+      background: linear-gradient(135deg, #1e7e34, #0f401b);
+      border-radius: 30px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(15, 64, 27, 0.3);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .secret-text {
+      font-size: 16px;
+      font-weight: 700;
+      z-index: 2;
+      position: relative;
+    }
+
+    /* Fantasminhas aleatórios e tortos espalhados no botão Secret */
+    .bg-ghost {
+      position: absolute;
+      color: rgba(255, 255, 255, 0.25);
+      font-size: 16px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Animações de Vibração / Shake */
+    .vibrate {
+      animation: vibrateAnim 0.3s linear infinite;
+    }
+
+    @keyframes vibrateAnim {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      20% { transform: translate(-3px, 2px) rotate(-3deg); }
+      40% { transform: translate(3px, -2px) rotate(3deg); }
+      60% { transform: translate(-2px, -2px) rotate(-2deg); }
+      80% { transform: translate(2px, 2px) rotate(2deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    /* Animação do balanço do clique */
+    .shake-btn {
+      animation: shakeBtn 0.4s ease-in-out;
+    }
+
+    @keyframes shakeBtn {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px) rotate(-2deg); }
+      40% { transform: translateX(6px) rotate(2deg); }
+      60% { transform: translateX(-4px) rotate(-1deg); }
+      80% { transform: translateX(4px) rotate(1deg); }
+    }
+
+    /* Elementos caindo / voando (Diamantes e Fantasmas) */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 22px;
+      user-select: none;
+    }
+
+    @keyframes dropGhost {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(180px) scale(0.6) rotate(25deg);
+      }
+    }
+
+    @keyframes flyDiamond {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.8) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(360deg);
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="profile-container">
-    <img class="avatar" src="IMG_20260908_190605.jpg" alt="Foto de perfil de Felipe">
+    <!-- Foto Perfil -->
+    <div class="avatar-wrapper" id="avatarWrapper">
+      <img class="avatar" src="IMG_20260908_190605.jpg" alt="Foto de perfil de Felipe">
+    </div>
 
     <div class="name-container">
       <h1 class="name">Felipe</h1>
-      <!-- Imagem do verificado personalizada -->
       <img src="9195920.png" alt="Verificado" class="verified-badge-img">
     </div>
 
     <p class="bio">me siga nas redes sociais</p>
 
     <!-- Botão Principal (Menu Retrátil) -->
-    <button class="accordion" id="sociaisBtn">
+    <button class="accordion interactive-btn" id="sociaisBtn">
       <span class="title">sociais</span>
       <i class="fa-solid fa-chevron-down arrow"></i>
     </button>
@@ -185,43 +277,153 @@
     <!-- Lista de Redes Sociais -->
     <div class="links-container" id="linksList">
       
-      <a href="https://www.facebook.com/share/1EYmLLQw6x/" class="link-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.facebook.com/share/1EYmLLQw6x/" class="link-card interactive-btn" target="_blank" rel="noopener noreferrer">
         <div class="icon-circle"><i class="fa-brands fa-facebook-f"></i></div>
         <span class="link-text">Facebook</span>
       </a>
 
-      <a href="https://www.tiktok.com/@fel1peofc?_r=1&_t=ZS-99Zf1UrYu7r" class="link-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.tiktok.com/@fel1peofc?_r=1&_t=ZS-99Zf1UrYu7r" class="link-card interactive-btn" target="_blank" rel="noopener noreferrer">
         <div class="icon-circle"><i class="fa-brands fa-tiktok"></i></div>
         <span class="link-text">tiktok</span>
       </a>
 
-      <a href="https://www.instagram.com/ifeliperei?stkn=djZ3cWpmN3RtZ3V5" class="link-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.instagram.com/ifeliperei?stkn=djZ3cWpmN3RtZ3V5" class="link-card interactive-btn" target="_blank" rel="noopener noreferrer">
         <div class="icon-circle"><i class="fa-brands fa-instagram"></i></div>
         <span class="link-text">Instagram</span>
       </a>
 
-      <a href="https://www.snapchat.com/add/f3lipeoficial?share_id=sZYquIEBCKA&locale=pt-BR" class="link-card" target="_blank" rel="noopener noreferrer">
+      <a href="https://www.snapchat.com/add/f3lipeoficial?share_id=sZYquIEBCKA&locale=pt-BR" class="link-card interactive-btn" target="_blank" rel="noopener noreferrer">
         <div class="icon-circle"><i class="fa-brands fa-snapchat"></i></div>
         <span class="link-text">Snapchat</span>
       </a>
 
     </div>
 
-    <!-- Botão Secret (NGL) Separado abaixo do botão "sociais" -->
-    <a href="https://ngl.link/ifeliperei" class="link-card standalone-link" target="_blank" rel="noopener noreferrer">
-      <div class="icon-circle"><i class="fa-solid fa-ghost"></i></div>
-      <span class="link-text">secret</span>
+    <!-- Botão Secret com Fantasminhas aleatórios -->
+    <a href="https://ngl.link/ifeliperei" class="secret-card" id="secretBtn" target="_blank" rel="noopener noreferrer">
+      <!-- Fantasminhas decorativos em posições tortas/aleatórias -->
+      <i class="fa-solid fa-ghost bg-ghost" style="top: 8px; left: 12px; transform: rotate(-25deg) scale(1.1);"></i>
+      <i class="fa-solid fa-ghost bg-ghost" style="bottom: 6px; left: 60px; transform: rotate(15deg) scale(0.8);"></i>
+      <i class="fa-solid fa-ghost bg-ghost" style="top: 10px; left: 120px; transform: rotate(-10deg) scale(0.9);"></i>
+      <i class="fa-solid fa-ghost bg-ghost" style="bottom: 8px; right: 110px; transform: rotate(20deg) scale(1.2);"></i>
+      <i class="fa-solid fa-ghost bg-ghost" style="top: 6px; right: 55px; transform: rotate(-18deg) scale(0.85);"></i>
+      <i class="fa-solid fa-ghost bg-ghost" style="bottom: 10px; right: 15px; transform: rotate(12deg) scale(1.05);"></i>
+
+      <span class="secret-text">secret</span>
     </a>
 
   </div>
 
   <script>
+    // Desativa menu de contexto (clique com botão direito / toque longo para abrir guias)
+    document.addEventListener('contextmenu', e => e.preventDefault());
+
     const accordionBtn = document.getElementById('sociaisBtn');
     const linksList = document.getElementById('linksList');
+    const avatarWrapper = document.getElementById('avatarWrapper');
+    const secretBtn = document.getElementById('secretBtn');
 
+    // Toggle do Menu Retrátil
     accordionBtn.addEventListener('click', () => {
       accordionBtn.classList.toggle('active');
       linksList.classList.toggle('open');
+    });
+
+    // Animação de Balanço nos botões
+    document.querySelectorAll('.interactive-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.add('shake-btn');
+        setTimeout(() => btn.classList.remove('shake-btn'), 400);
+      });
+    });
+
+    // Função de vibração tátil do aparelho (se disponível)
+    function triggerHaptic() {
+      if (navigator.vibrate) {
+        navigator.vibrate([30, 50, 30]);
+      }
+    }
+
+    // Configuração de Eventos de Pressão Longa (Long Press)
+    function addLongPress(element, onLongPress) {
+      let timer = null;
+
+      const start = (e) => {
+        timer = setTimeout(() => {
+          triggerHaptic();
+          onLongPress(e);
+        }, 400);
+      };
+
+      const cancel = () => {
+        if (timer) clearTimeout(timer);
+      };
+
+      element.addEventListener('touchstart', start, { passive: true });
+      element.addEventListener('touchend', cancel);
+      element.addEventListener('touchmove', cancel);
+      element.addEventListener('mousedown', start);
+      element.addEventListener('mouseup', cancel);
+      element.addEventListener('mouseleave', cancel);
+    }
+
+    // 1. Clique Longo na FOTO: Vibra + Chuva de Diamantes 💎
+    addLongPress(avatarWrapper, (e) => {
+      avatarWrapper.classList.add('vibrate');
+      setTimeout(() => avatarWrapper.classList.remove('vibrate'), 800);
+
+      const rect = avatarWrapper.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      for (let i = 0; i < 18; i++) {
+        const diamond = document.createElement('div');
+        diamond.classList.add('particle');
+        diamond.innerHTML = '💎';
+        diamond.style.left = `${centerX}px`;
+        diamond.style.top = `${centerY}px`;
+
+        const dx = (Math.random() - 0.5) * 260;
+        const dy = (Math.random() - 0.5) * 260;
+        diamond.style.setProperty('--dx', `${dx}px`);
+        diamond.style.setProperty('--dy', `${dy}px`);
+        diamond.style.animation = 'flyDiamond 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards';
+
+        document.body.appendChild(diamond);
+        setTimeout(() => diamond.remove(), 900);
+      }
+    });
+
+    // 2. Clique Longo no BOTÃO SECRET: Vibra + Fantasmas Escorrendo 👻
+    addLongPress(secretBtn, (e) => {
+      secretBtn.classList.add('vibrate');
+      setTimeout(() => secretBtn.classList.remove('vibrate'), 800);
+
+      const rect = secretBtn.getBoundingClientRect();
+
+      for (let i = 0; i < 15; i++) {
+        const ghost = document.createElement('div');
+        ghost.classList.add('particle');
+        ghost.innerHTML = '👻';
+        
+        const randomX = rect.left + Math.random() * rect.width;
+        const startY = rect.bottom - 10;
+        
+        ghost.style.left = `${randomX}px`;
+        ghost.style.top = `${startY}px`;
+        ghost.style.animation = `dropGhost ${0.8 + Math.random() * 0.4}s ease-in forwards`;
+
+        document.body.appendChild(ghost);
+        setTimeout(() => ghost.remove(), 1200);
+      }
+    });
+
+    // 3. Clique Longo no resto da Página: Vibração sutil
+    addLongPress(document.body, (e) => {
+      if (e.target === document.body) {
+        document.body.classList.add('vibrate');
+        setTimeout(() => document.body.classList.remove('vibrate'), 300);
+      }
     });
   </script>
 
