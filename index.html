@@ -66,10 +66,10 @@
       margin-bottom: 24px;
     }
 
-    /* Estilo do menu expansível */
+    /* Estilo do menu expansível com gradiente verde */
     .accordion {
       width: 100%;
-      background-color: #F3ECE7;
+      background: linear-gradient(135deg, #1e7e34, #0f401b);
       border: none;
       border-radius: 30px;
       padding: 16px 24px;
@@ -79,9 +79,13 @@
       cursor: pointer;
       font-size: 16px;
       font-weight: 700;
-      color: #111111;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
-      transition: background-color 0.2s ease;
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(15, 64, 27, 0.3);
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .accordion:active {
+      transform: scale(0.98);
     }
 
     .accordion .title {
@@ -114,15 +118,16 @@
       max-height: 800px;
     }
 
+    /* Estilo dos Cards de Link com gradiente verde */
     .link-card {
-      background-color: #F3ECE7;
+      background: linear-gradient(135deg, #1e7e34, #0f401b);
       border-radius: 30px;
       padding: 14px 20px;
       display: flex;
       align-items: center;
       text-decoration: none;
-      color: #111111;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(15, 64, 27, 0.2);
       transition: transform 0.1s ease;
     }
 
@@ -130,16 +135,23 @@
       transform: scale(0.98);
     }
 
+    /* Estilo para o botão Secret (separado) */
+    .standalone-link {
+      width: 100%;
+      margin-top: 12px;
+    }
+
     .icon-circle {
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      border: 2px solid #111111;
+      border: 2px solid #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 18px;
       font-weight: bold;
+      color: #ffffff;
     }
 
     .link-text {
@@ -193,12 +205,14 @@
         <span class="link-text">Snapchat</span>
       </a>
 
-      <a href="https://ngl.link/ifeliperei" class="link-card" target="_blank" rel="noopener noreferrer">
-        <div class="icon-circle" style="font-size: 11px;">NGL</div>
-        <span class="link-text">NGL</span>
-      </a>
-
     </div>
+
+    <!-- Botão Secret (NGL) Separado abaixo do botão "sociais" -->
+    <a href="https://ngl.link/ifeliperei" class="link-card standalone-link" target="_blank" rel="noopener noreferrer">
+      <div class="icon-circle"><i class="fa-solid fa-ghost"></i></div>
+      <span class="link-text">secret</span>
+    </a>
+
   </div>
 
   <script>
