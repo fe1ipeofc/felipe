@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ffffff">
-  <meta name="description" content="Felipe: ex-cantor Lipe Roys, dançarino, rei junino e desenvolvedor mobile.">
-  <title>Felipe | Portfólio oficial</title>
+  <meta name="description" content="Felipe Silva: ex-cantor Lipe Roys, dançarino, rei junino e desenvolvedor mobile.">
+  <title>Felipe Silva | Portfólio oficial</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
@@ -619,16 +619,11 @@
 
       .hero-photo {
         height: min(115vw, 510px);
-        order: 0;
-      }
-
-      .hero-copy {
-        order: 1;
-        padding: 5px 0;
       }
 
       h1 {
         font-size: 48px;
+        overflow-wrap: anywhere;
       }
 
       .intro {
@@ -678,6 +673,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
+
       *, *::before, *::after {
         transition-duration: .01ms !important;
       }
@@ -710,18 +706,19 @@
             <i class="fa-brands fa-facebook-f"></i>
           </a>
 
-          <a href="#" id="shareButton" aria-label="Compartilhar site">
+          <a href="#"
+             id="shareButton"
+             aria-label="Compartilhar site">
             <i class="fa-solid fa-share-nodes"></i>
           </a>
         </div>
 
         <a class="logo" href="#inicio">
-          <span class="logo-symbol">FR.</span>
-          <span class="logo-name">Felipe</span>
+          <span class="logo-symbol">FS.</span>
+          <span class="logo-name">Felipe Silva</span>
           <span class="logo-subtitle">Arte · Movimento · Código</span>
         </a>
 
-        <!-- Abre diretamente o aplicativo de e-mail -->
         <a class="contact-button"
            href="mailto:fe1ip3ofc@gmail.com?subject=Contato%20pelo%20site">
           Fale comigo <i class="fa-solid fa-arrow-right"></i>
@@ -748,7 +745,7 @@
           <div class="eyebrow">Prazer, sou o Felipe</div>
 
           <h1>
-            Felipe
+            Felipe Silva
             <span>Uma história em constante movimento.</span>
           </h1>
 
@@ -766,11 +763,10 @@
         </div>
 
         <div>
-          <!-- Mantenha IMG_20260908_190605.jpg na mesma pasta deste arquivo -->
           <img
             class="hero-photo"
             src="IMG_20260908_190605.jpg"
-            alt="Foto de Felipe"
+            alt="Foto de Felipe Silva"
           >
         </div>
 
@@ -1063,7 +1059,7 @@
     <footer>
       <div class="container footer-inner">
         <span>
-          © <span id="year"></span> Felipe. Todos os direitos reservados.
+          © <span id="year"></span> Felipe Silva. Todos os direitos reservados.
         </span>
 
         <a href="#inicio">Voltar ao início ↑</a>
@@ -1093,7 +1089,7 @@
       event.preventDefault();
 
       const shareData = {
-        title: "Felipe | Portfólio oficial",
+        title: "Felipe Silva | Portfólio oficial",
         text: "Conheça minha história, meus projetos e minhas redes sociais.",
         url: window.location.href
       };
@@ -1110,11 +1106,17 @@
             shareToast.classList.remove("show");
           }, 2500);
         } else {
-          window.prompt("Copie o endereço do site:", window.location.href);
+          window.prompt(
+            "Copie o endereço do site:",
+            window.location.href
+          );
         }
       } catch (error) {
         if (error.name !== "AbortError") {
-          window.prompt("Copie o endereço do site:", window.location.href);
+          window.prompt(
+            "Copie o endereço do site:",
+            window.location.href
+          );
         }
       }
     });
