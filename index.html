@@ -1,291 +1,592 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Felipe</title>
-  <!-- Ícones do FontAwesome -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Conheça Felipe: ex-cantor Lipe Roys, dançarino, rei junino e desenvolvedor mobile.">
+  <title>Felipe — Arte, movimento & tecnologia</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
   <style>
+    :root {
+      --bg: #ffffff;
+      --ink: #111111;
+      --muted: #666666;
+      --line: rgba(0,0,0,.10);
+      --soft: rgba(0,0,0,.045);
+      --soft-hover: rgba(0,0,0,.075);
+      --shadow: 0 18px 50px rgba(0,0,0,.07);
+      --radius: 24px;
+      --page: 1180px;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      -webkit-touch-callout: none; /* Desativa menu de toque no iOS */
-      -webkit-user-select: none;   /* Desativa seleção de texto */
-      user-select: none;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 92px;
     }
 
     body {
-      background-color: #ffffff;
-      color: #111111;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px 20px 40px 20px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
       overflow-x: hidden;
-      position: relative;
     }
 
-    /* Top Bar para os botões Liquid Glass */
-    .top-bar {
-      width: 100%;
-      max-width: 420px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      z-index: 10;
+    a { color: inherit; }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* Estilo Base Liquid Glass (Vidro Líquido / Blur) */
-    .glass-btn {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.05);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    button { font: inherit; }
+
+    .site-shell {
+      width: min(calc(100% - 44px), 1400px);
+      margin: 28px auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .browser-bar {
+      height: 22px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: #111111;
-      font-size: 18px;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .glass-btn:active {
-      transform: scale(0.92);
-      background: rgba(0, 0, 0, 0.1);
-    }
-
-    .profile-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 420px;
-      position: relative;
-    }
-
-    .avatar-wrapper {
-      position: relative;
-      margin-bottom: 16px;
-      cursor: pointer;
-    }
-
-    .avatar {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-      border: 2px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .name-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
       gap: 6px;
-      margin-bottom: 6px;
+      padding: 0 12px;
+      background: #3f3f3f;
     }
 
-    .name {
-      font-size: 22px;
-      font-weight: 700;
-      color: #111111;
+    .browser-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #e86c64;
     }
 
-    .verified-badge-img {
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
+    .browser-dot:nth-child(2) { background: #e8c45d; }
+    .browser-dot:nth-child(3) { background: #70c777; }
+
+    .page {
+      width: min(100% - 64px, var(--page));
+      margin: 0 auto;
     }
 
-    .bio {
+    .site-header {
+      position: relative;
+      padding: 26px 0 18px;
+      background: #fff;
+      z-index: 5;
+    }
+
+    .header-top {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .social-mini {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .social-mini a {
+      text-decoration: none;
+      color: #555;
       font-size: 15px;
-      color: #555555;
+      transition: color .2s, transform .2s;
+    }
+
+    .social-mini a:hover {
+      color: #111;
+      transform: translateY(-2px);
+    }
+
+    .brand {
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1.1;
+    }
+
+    .brand-mark {
+      width: 74px;
+      height: 74px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 25px;
+      letter-spacing: -2px;
+      margin-bottom: 7px;
+    }
+
+    .brand-name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: .03em;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .header-action {
+      justify-self: end;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      background: var(--ink);
+      color: #fff;
+      padding: 12px 17px;
+      border: 1px solid var(--ink);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transition: background .2s, color .2s;
+    }
+
+    .header-action:hover {
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .main-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: clamp(15px, 2.4vw, 34px);
+      margin-top: 24px;
+    }
+
+    .main-nav a {
+      color: #666;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .main-nav a:hover { color: #111; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      align-items: center;
+      gap: clamp(35px, 7vw, 100px);
+      padding: 12px 0 72px;
+    }
+
+    .hero-copy {
+      text-align: center;
+      padding: 16px 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #777;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: .2em;
+      font-weight: 700;
+      margin-bottom: 19px;
+    }
+
+    .eyebrow:before,
+    .eyebrow:after {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: #aaa;
+    }
+
+    h1, h2, h3 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 500;
+      line-height: 1.15;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 5vw, 64px);
+      letter-spacing: -.035em;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-size: .52em;
+      font-family: "DM Sans", sans-serif;
+      font-weight: 500;
+      letter-spacing: .02em;
+      margin-top: 11px;
+    }
+
+    .hero-quote {
+      color: #777;
+      max-width: 440px;
+      margin: 0 auto 28px;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-decoration: none;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: #fff;
+      padding: 14px 23px;
+      min-height: 48px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: transform .2s, background .2s, color .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .hero-image-wrap {
+      min-height: 460px;
+      background: var(--soft);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
+      display: block;
+      object-fit: cover;
+      object-position: center 35%;
+    }
+
+    .image-caption {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      padding: 9px 13px;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(12px);
+      font-size: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .intro-note {
+      max-width: 780px;
+      text-align: center;
+      margin: 0 auto;
+      padding: 0 0 82px;
+    }
+
+    .intro-note h2 {
+      font-size: clamp(24px, 3vw, 34px);
+      margin-bottom: 16px;
+    }
+
+    .intro-note p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.9;
+      margin: 0 auto;
+      max-width: 740px;
+    }
+
+    .section {
+      padding: 76px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 42px;
+    }
+
+    .section-heading .eyebrow { margin-bottom: 14px; }
+
+    .section-heading h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      margin-bottom: 13px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .journey-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .journey-card {
+      padding: 28px 25px;
+      border: 1px solid var(--line);
+      background: #fff;
+      min-height: 220px;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .journey-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .journey-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      margin-bottom: 22px;
+      font-size: 16px;
+    }
+
+    .journey-card h3 {
+      font-size: 23px;
+      margin-bottom: 12px;
+    }
+
+    .journey-card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .timeline {
+      max-width: 790px;
+      margin: 0 auto;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 115px 1fr;
+      gap: 25px;
+      padding: 23px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .timeline-label {
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #777;
+      font-weight: 700;
+      padding-top: 5px;
+    }
+
+    .timeline-item h3 {
+      font-size: 22px;
+      margin-bottom: 7px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .press-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .press-card {
+      border: 1px solid var(--line);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 245px;
+      background: #fff;
+      transition: box-shadow .2s, transform .2s;
+    }
+
+    .press-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+
+    .press-icon {
+      font-size: 20px;
       margin-bottom: 24px;
+    }
+
+    .press-card .source-type {
+      color: #777;
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      margin-bottom: 9px;
+    }
+
+    .press-card h3 {
+      font-size: 25px;
+      margin-bottom: 12px;
+    }
+
+    .press-card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 23px;
+    }
+
+    .text-link {
+      margin-top: auto;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #111;
+    }
+
+    .text-link i { transition: transform .2s; }
+    .text-link:hover i { transform: translateX(4px); }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .social-card {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 17px;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      background: #fff;
+      transition: background .2s, transform .2s;
+    }
+
+    .social-card:hover {
+      background: var(--soft);
+      transform: translateY(-3px);
+    }
+
+    .social-card i {
+      font-size: 19px;
+      width: 24px;
       text-align: center;
     }
 
-    /* Estilo Liquid Glass para o Botão Principal "Seguir" */
-    .accordion {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.05);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 30px;
-      padding: 16px 24px;
+    .social-card span {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .contact-panel {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 700;
-      color: #111111;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease, background 0.2s ease;
+      gap: 28px;
+      padding: 38px;
+      border: 1px solid var(--line);
+      background: var(--soft);
     }
 
-    .accordion:active {
-      background: rgba(0, 0, 0, 0.1);
+    .contact-panel h2 {
+      font-size: clamp(26px, 3vw, 36px);
+      margin-bottom: 9px;
     }
 
-    .accordion .title {
-      flex-grow: 1;
-      text-align: center;
+    .contact-panel p {
+      color: var(--muted);
+      font-size: 13px;
     }
 
-    .accordion .arrow {
-      font-size: 14px;
-      transition: transform 0.3s ease;
-    }
-
-    .accordion.active .arrow {
-      transform: rotate(180deg);
-    }
-
-    /* Container dos Links */
-    .links-container {
-      width: 100%;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease-out;
+    .contact-actions {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 0px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    .links-container.open {
-      max-height: 800px;
-      margin-top: 12px;
+    .button-outline {
+      background: transparent;
+      color: var(--ink);
     }
 
-    /* Estilo Liquid Glass para os Cards das Redes Sociais */
-    .link-card {
-      background: rgba(0, 0, 0, 0.04);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 30px;
-      padding: 14px 20px;
+    .button-outline:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    footer {
+      padding: 27px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
       display: flex;
+      justify-content: space-between;
+      gap: 18px;
       align-items: center;
-      text-decoration: none;
-      color: #111111;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-      transition: transform 0.1s ease, background 0.2s ease;
-      position: relative;
+      color: #777;
+      font-size: 11px;
     }
 
-    .link-card:active {
-      background: rgba(0, 0, 0, 0.08);
-    }
+    .footer-inner a { text-decoration: none; }
 
-    .icon-circle {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      border: 2px solid rgba(0, 0, 0, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      font-weight: bold;
-      color: #111111;
-      z-index: 2;
-      background: rgba(0, 0, 0, 0.03);
-    }
-
-    .link-text {
-      flex-grow: 1;
-      text-align: center;
-      font-size: 15px;
-      font-weight: 700;
-      padding-right: 38px;
-      z-index: 2;
-    }
-
-    /* Estilo Liquid Glass para o Botão Secret */
-    .secret-card {
-      width: 100%;
-      margin-top: 12px;
-      background: rgba(0, 0, 0, 0.05);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 30px;
-      padding: 16px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: #111111;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, background 0.2s ease;
-    }
-
-    .secret-card:active {
-      background: rgba(0, 0, 0, 0.1);
-    }
-
-    .secret-card.hidden {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-10px);
-      height: 0;
-      padding: 0;
-      margin-top: 0;
-    }
-
-    .secret-text {
-      font-size: 16px;
-      font-weight: 700;
-      z-index: 2;
-      position: relative;
-    }
-
-    .bg-ghost {
-      position: absolute;
-      color: rgba(0, 0, 0, 0.15);
-      font-size: 16px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Pop-up Menu Liquid Glass */
     .modal-overlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      background: rgba(0,0,0,.25);
+      backdrop-filter: blur(9px);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity .25s;
+      padding: 20px;
     }
 
     .modal-overlay.active {
@@ -294,388 +595,278 @@
     }
 
     .modal-card {
-      width: 90%;
-      max-width: 320px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 28px;
-      padding: 24px 20px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      text-align: center;
-      transform: scale(0.85);
-      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      width: min(100%, 360px);
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--line);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transform: translateY(10px) scale(.98);
+      transition: transform .25s;
     }
 
     .modal-overlay.active .modal-card {
-      transform: scale(1);
+      transform: translateY(0) scale(1);
     }
 
-    .modal-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #111111;
-      margin-bottom: 4px;
+    .modal-card h3 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     .modal-item {
-      background: rgba(0, 0, 0, 0.05);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      color: #111111;
-      padding: 12px 16px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-      transition: background 0.2s ease;
+      gap: 11px;
+      padding: 13px;
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
     }
 
-    .modal-item:active {
-      background: rgba(0, 0, 0, 0.1);
-    }
-
-    .modal-close-btn {
+    .modal-close {
+      display: block;
+      margin: 20px auto 0;
       background: transparent;
-      border: none;
-      font-size: 14px;
-      font-weight: 600;
-      color: #666666;
+      border: 0;
+      color: var(--muted);
       cursor: pointer;
-      margin-top: 6px;
+      font-size: 12px;
     }
 
-    /* Notificação Toast */
     .toast {
       position: fixed;
-      bottom: 30px;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
+      left: 50%;
+      bottom: 24px;
+      z-index: 70;
+      transform: translate(-50%, 15px);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 200;
+      background: #111;
+      color: #fff;
+      padding: 11px 18px;
+      border-radius: 4px;
+      font-size: 12px;
+      transition: .25s;
     }
 
     .toast.show {
       opacity: 1;
+      transform: translate(-50%, 0);
     }
 
-    /* Animações de Vibração / Shake */
-    .vibrate {
-      animation: vibrateAnim 0.3s linear infinite;
-    }
-
-    @keyframes vibrateAnim {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      20% { transform: translate(-3px, 2px) rotate(-3deg); }
-      40% { transform: translate(3px, -2px) rotate(3deg); }
-      60% { transform: translate(-2px, -2px) rotate(-2deg); }
-      80% { transform: translate(2px, 2px) rotate(2deg); }
-      100% { transform: translate(0, 0) rotate(0deg); }
-    }
-
-    .shake-btn {
-      animation: shakeBtn 0.4s ease-in-out;
-    }
-
-    @keyframes shakeBtn {
-      0%, 100% { transform: translateX(0); }
-      20% { transform: translateX(-6px) rotate(-2deg); }
-      40% { transform: translateX(6px) rotate(2deg); }
-      60% { transform: translateX(-4px) rotate(-1deg); }
-      80% { transform: translateX(4px) rotate(1deg); }
-    }
-
-    /* Elementos caindo / voando */
-    .particle {
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      font-size: 22px;
-      user-select: none;
-    }
-
-    @keyframes dropGhost {
-      0% {
-        opacity: 1;
-        transform: translateY(0) scale(1) rotate(0deg);
+    @media (max-width: 760px) {
+      .site-shell {
+        width: calc(100% - 18px);
+        margin: 9px auto;
       }
-      100% {
-        opacity: 0;
-        transform: translateY(180px) scale(0.6) rotate(25deg);
+
+      .page { width: calc(100% - 36px); }
+      .site-header { padding-top: 22px; }
+
+      .header-top {
+        grid-template-columns: 1fr auto 1fr;
+        gap: 8px;
+      }
+
+      .social-mini { gap: 12px; }
+      .social-mini a { font-size: 14px; }
+
+      .brand-mark {
+        width: 61px;
+        height: 61px;
+        font-size: 22px;
+      }
+
+      .brand-name { font-size: 14px; }
+      .brand-sub { font-size: 8px; }
+
+      .header-action {
+        padding: 10px 11px;
+        font-size: 9px;
+        gap: 6px;
+      }
+
+      .main-nav {
+        gap: 13px 17px;
+        margin-top: 22px;
+      }
+
+      .main-nav a { font-size: 10px; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 24px 0 55px;
+      }
+
+      .hero-copy { order: 1; }
+
+      .hero-image-wrap {
+        order: 0;
+        min-height: 360px;
+      }
+
+      .hero-image {
+        min-height: 360px;
+        max-height: 520px;
+      }
+
+      .hero h1 { font-size: 48px; }
+      .hero-quote { font-size: 13px; }
+      .intro-note { padding-bottom: 56px; }
+      .section { padding: 55px 0; }
+      .journey-grid { grid-template-columns: 1fr; }
+      .journey-card { min-height: auto; }
+      .press-grid { grid-template-columns: 1fr; }
+      .social-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .contact-panel {
+        padding: 27px 22px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 6px;
       }
     }
 
-    @keyframes flyDiamond {
-      0% {
-        opacity: 1;
-        transform: translate(0, 0) scale(0.8) rotate(0deg);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(var(--dx), var(--dy)) scale(1.4) rotate(360deg);
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
       }
     }
   </style>
 </head>
+
 <body>
-
-  <!-- Top Bar com Botões Liquid Glass -->
-  <div class="top-bar">
-    <button class="glass-btn" id="msgBtn" aria-label="Enviar Mensagem">
-      <i class="fa-regular fa-paper-plane"></i>
-    </button>
-    <button class="glass-btn" id="shareBtn" aria-label="Compartilhar">
-      <i class="fa-solid fa-arrow-up-from-bracket"></i>
-    </button>
-  </div>
-
-  <div class="profile-container">
-    <!-- Foto Perfil -->
-    <div class="avatar-wrapper" id="avatarWrapper">
-      <img class="avatar" src="IMG_20260908_190605.jpg" alt="Foto de perfil de Felipe">
+  <div class="site-shell">
+    <div class="browser-bar" aria-hidden="true">
+      <span class="browser-dot"></span>
+      <span class="browser-dot"></span>
+      <span class="browser-dot"></span>
     </div>
 
-    <div class="name-container">
-      <h1 class="name">Felipe</h1>
-      <img src="9195920.png" alt="Verificado" class="verified-badge-img">
-    </div>
+    <header class="site-header page">
+      <div class="header-top">
+        <div class="social-mini" aria-label="Redes sociais">
+          <a href="https://www.instagram.com/ifeliperei?stkn=djZ3cWpmN3RtZ3V5"
+             target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
 
-    <p class="bio">Da uma olhadinha nas minhas outras redes?🙏🏻🙃</p>
+          <a href="#" id="shareTop" aria-label="Compartilhar site">
+            <i class="fa-solid fa-share-nodes"></i>
+          </a>
+        </div>
 
-    <!-- Botão Principal (Menu Retrátil) -->
-    <button class="accordion interactive-btn" id="sociaisBtn">
-      <span class="title">Seguir</span>
-      <i class="fa-solid fa-chevron-down arrow"></i>
-    </button>
+        <a class="brand" href="#inicio" aria-label="Felipe — página inicial">
+          <span class="brand-mark">FR.</span>
+          <span class="brand-name">Felipe</span>
+          <span class="brand-sub">Arte · Movimento · Código</span>
+        </a>
 
-    <!-- Lista de Redes Sociais -->
-    <div class="links-container" id="linksList">
-      
-      <a href="https://www.facebook.com/share/1EYmLLQw6x/" class="link-card interactive-btn" target="_blank" rel="noopener noreferrer">
-        <div class="icon-circle"><i class="fa-brands fa-facebook-f"></i></div>
-        <span class="link-text">Facebook</span>
-      </a>
+        <a class="header-action" href="#contato">
+          Fale comigo <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
 
-      <a href="https://www.tiktok.com/@fel1peofc?_r=1&_t=ZS-99Zf1UrYu7r" class="link-card interactive-btn" target="_blank" rel="noopener noreferrer">
-        <div class="icon-circle"><i class="fa-brands fa-tiktok"></i></div>
-        <span class="link-text">tiktok</span>
-      </a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre mim</a>
+        <a href="#trajetoria">Trajetória</a>
+        <a href="#imprensa">Na imprensa</a>
+        <a href="#redes">Redes sociais</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </header>
 
-      <a href="https://www.instagram.com/ifeliperei?stkn=djZ3cWpmN3RtZ3V5" class="link-card interactive-btn" target="_blank" rel="noopener noreferrer">
-        <div class="icon-circle"><i class="fa-brands fa-instagram"></i></div>
-        <span class="link-text">Instagram</span>
-      </a>
+    <main>
+      <section class="hero page" id="inicio">
+        <div class="hero-copy">
+          <div class="eyebrow">Prazer, sou o Felipe</div>
 
-      <a href="https://www.snapchat.com/add/f3lipeoficial?share_id=sZYquIEBCKA&locale=pt-BR" class="link-card interactive-btn" target="_blank" rel="noopener noreferrer">
-        <div class="icon-circle"><i class="fa-brands fa-snapchat"></i></div>
-        <span class="link-text">Snapchat</span>
-      </a>
+          <h1>
+            Felipe
+            <span>Uma história em constante movimento.</span>
+          </h1>
 
-    </div>
+          <p class="hero-quote">
+            “A gente não precisa seguir um único caminho para continuar sendo quem é.
+            Cada fase pode revelar uma nova forma de criar, sentir e se expressar.”
+          </p>
 
-    <!-- Botão Secret com Fantasminhas aleatórios -->
-    <a href="https://ngl.link/ifeliperei" class="secret-card" id="secretBtn" target="_blank" rel="noopener noreferrer">
-      <i class="fa-solid fa-ghost bg-ghost" style="top: 8px; left: 12px; transform: rotate(-25deg) scale(1.1);"></i>
-      <i class="fa-solid fa-ghost bg-ghost" style="bottom: 6px; left: 60px; transform: rotate(15deg) scale(0.8);"></i>
-      <i class="fa-solid fa-ghost bg-ghost" style="top: 10px; left: 120px; transform: rotate(-10deg) scale(0.9);"></i>
-      <i class="fa-solid fa-ghost bg-ghost" style="bottom: 8px; right: 110px; transform: rotate(20deg) scale(1.2);"></i>
-      <i class="fa-solid fa-ghost bg-ghost" style="top: 6px; right: 55px; transform: rotate(-18deg) scale(0.85);"></i>
-      <i class="fa-solid fa-ghost bg-ghost" style="bottom: 10px; right: 15px; transform: rotate(12deg) scale(1.05);"></i>
+          <a class="button" href="#sobre">
+            Conheça minha história <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
 
-      <span class="secret-text">mensagem anônima</span>
-    </a>
+        <div class="hero-image-wrap">
+          <img
+            class="hero-image"
+            src="IMG_20260908_190605.jpg"
+            alt="Retrato de Felipe"
+            onerror="this.style.display='none'; this.parentElement.style.minHeight='360px';"
+          >
+          <span class="image-caption">Criatividade em movimento</span>
+        </div>
+      </section>
 
-  </div>
+      <section class="intro-note page" id="sobre">
+        <div class="eyebrow">Quem sou hoje</div>
 
-  <!-- Modal Pop-up para Mensagens -->
-  <div class="modal-overlay" id="contactModal">
-    <div class="modal-card">
-      <h3 class="modal-title">Enviar mensagem</h3>
-      <a href="https://t.me/fe1ipeofc" target="_blank" class="modal-item">
-        <i class="fa-brands fa-telegram"></i> Telegram
-      </a>
-      <a href="mailto:fe1ip3ofc@gmail.com" class="modal-item">
-        <i class="fa-regular fa-envelope"></i> E-mail
-      </a>
-      <button class="modal-close-btn" id="closeModal">Fechar</button>
-    </div>
-  </div>
+        <h2>De Lipe Roys a novos palcos e novas ideias.</h2>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast">Link copiado para a área de transferência!</div>
+        <p>
+          Tenho 22 anos e minha trajetória passa por diferentes formas de expressão.
+          Já vivi a música como cantor, usando o nome artístico
+          <strong>Lipe Roys</strong>. Hoje, meu caminho segue por outras paixões:
+          a dança, a cultura junina como rei junino e o desenvolvimento mobile.
+          Mudei de direção, mas continuo movido pela vontade de criar, aprender e contar histórias.
+        </p>
+      </section>
 
-  <script>
-    // Desativa menu de contexto
-    document.addEventListener('contextmenu', e => e.preventDefault());
+      <section class="section">
+        <div class="page">
+          <div class="section-heading">
+            <div class="eyebrow">Meus caminhos</div>
+            <h2>Três formas de me expressar</h2>
+            <p>
+              Áreas diferentes, conectadas pela criatividade, pela dedicação
+              e pela vontade de fazer acontecer.
+            </p>
+          </div>
 
-    const accordionBtn = document.getElementById('sociaisBtn');
-    const linksList = document.getElementById('linksList');
-    const secretBtn = document.getElementById('secretBtn');
-    const avatarWrapper = document.getElementById('avatarWrapper');
+          <div class="journey-grid">
+            <article class="journey-card">
+              <div class="journey-icon">
+                <i class="fa-solid fa-music"></i>
+              </div>
+              <h3>A música</h3>
+              <p>
+                Em uma fase anterior, me apresentei como Lipe Roys.
+                A música fez parte da minha história e continua sendo
+                um capítulo importante de quem sou.
+              </p>
+            </article>
 
-    const msgBtn = document.getElementById('msgBtn');
-    const shareBtn = document.getElementById('shareBtn');
-    const contactModal = document.getElementById('contactModal');
-    const closeModal = document.getElementById('closeModal');
-    const toast = document.getElementById('toast');
-
-    // Alternar o menu sociais e Ocultar/Mostrar o botão secret
-    accordionBtn.addEventListener('click', () => {
-      accordionBtn.classList.toggle('active');
-      linksList.classList.toggle('open');
-      
-      // Oculta o secret se as sociais estiverem abertas
-      if (linksList.classList.contains('open')) {
-        secretBtn.classList.add('hidden');
-      } else {
-        secretBtn.classList.remove('hidden');
-      }
-    });
-
-    // Abrir/Fechar Pop-up de Mensagem
-    msgBtn.addEventListener('click', () => {
-      contactModal.classList.add('active');
-    });
-
-    closeModal.addEventListener('click', () => {
-      contactModal.classList.remove('active');
-    });
-
-    contactModal.addEventListener('click', (e) => {
-      if (e.target === contactModal) {
-        contactModal.classList.remove('active');
-      }
-    });
-
-    // Função de Compartilhamento
-    shareBtn.addEventListener('click', async () => {
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: 'Felipe',
-            url: window.location.href
-          });
-        } catch (err) {}
-      } else {
-        navigator.clipboard.writeText(window.location.href);
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
-      }
-    });
-
-    // Animação de Balanço nos botões
-    document.querySelectorAll('.interactive-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.classList.add('shake-btn');
-        setTimeout(() => btn.classList.remove('shake-btn'), 400);
-      });
-    });
-
-    function triggerHaptic() {
-      if (navigator.vibrate) {
-        navigator.vibrate([30, 50, 30]);
-      }
-    }
-
-    function addLongPress(element, onLongPress) {
-      let timer = null;
-
-      const start = (e) => {
-        timer = setTimeout(() => {
-          triggerHaptic();
-          onLongPress(e);
-        }, 400);
-      };
-
-      const cancel = () => {
-        if (timer) clearTimeout(timer);
-      };
-
-      element.addEventListener('touchstart', start, { passive: true });
-      element.addEventListener('touchend', cancel);
-      element.addEventListener('touchmove', cancel);
-      element.addEventListener('mousedown', start);
-      element.addEventListener('mouseup', cancel);
-      element.addEventListener('mouseleave', cancel);
-    }
-
-    // 1. Clique Longo na FOTO: Vibra + Chuva de Diamantes 💎
-    addLongPress(avatarWrapper, () => {
-      avatarWrapper.classList.add('vibrate');
-      setTimeout(() => avatarWrapper.classList.remove('vibrate'), 800);
-
-      const rect = avatarWrapper.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      for (let i = 0; i < 18; i++) {
-        const diamond = document.createElement('div');
-        diamond.classList.add('particle');
-        diamond.innerHTML = '💎';
-        diamond.style.left = `${centerX}px`;
-        diamond.style.top = `${centerY}px`;
-
-        const dx = (Math.random() - 0.5) * 260;
-        const dy = (Math.random() - 0.5) * 260;
-        diamond.style.setProperty('--dx', `${dx}px`);
-        diamond.style.setProperty('--dy', `${dy}px`);
-        diamond.style.animation = 'flyDiamond 0.9s cubic-bezier(0.1, 0.8, 0.3, 1) forwards';
-
-        document.body.appendChild(diamond);
-        setTimeout(() => diamond.remove(), 900);
-      }
-    });
-
-    // 2. Clique Longo no BOTÃO SECRET: Vibra + Fantasmas Escorrendo 👻
-    addLongPress(secretBtn, () => {
-      secretBtn.classList.add('vibrate');
-      setTimeout(() => secretBtn.classList.remove('vibrate'), 800);
-
-      const rect = secretBtn.getBoundingClientRect();
-
-      for (let i = 0; i < 15; i++) {
-        const ghost = document.createElement('div');
-        ghost.classList.add('particle');
-        ghost.innerHTML = '👻';
-        
-        const randomX = rect.left + Math.random() * rect.width;
-        const startY = rect.bottom - 10;
-        
-        ghost.style.left = `${randomX}px`;
-        ghost.style.top = `${startY}px`;
-        ghost.style.animation = `dropGhost ${0.8 + Math.random() * 0.4}s ease-in forwards`;
-
-        document.body.appendChild(ghost);
-        setTimeout(() => ghost.remove(), 1200);
-      }
-    });
-
-    // 3. Clique Longo no resto da Página
-    addLongPress(document.body, (e) => {
-      if (e.target === document.body) {
-        document.body.classList.add('vibrate');
-        setTimeout(() => document.body.classList.remove('vibrate'), 300);
-      }
-    });
-  </script>
-
-</body>
-</html>
+            <article class="journey-card">
+              <div class="journey-icon">
+                <i class="fa-solid fa-person"></i>
+              </div>
+              <h3>A dança & o São João</h3>
+              <p>
+                Hoje sigo como dançarino e rei junino, valorizando a cultura popular,
+                a força das quadrilhas e a emoção de levar uma h
